@@ -25,7 +25,7 @@ class User(models.Model):
     email = models.EmailField(max_length=256)
     password = models.CharField(max_length=256)
 
-    token = models.CharField(max_length=256, default=get_random_string(256))
+    token = models.CharField(max_length=128, default=get_random_string(128))
 
     def save(*args, **kwargs):
         self.password = make_password(self.password)

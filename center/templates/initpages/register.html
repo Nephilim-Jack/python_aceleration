@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesImport %}
+<link rel="stylesheet" href={% static 'center/registerLoginPage.css' %}>
+{% endblock stylesImport %}
+{% block content %}
+    <h1>Página de Cadastro</h1>
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    </form>
+{% endblock content %}

@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.hashers import make_password
 from django.utils.crypto import get_random_string
+from django.contrib.auth.hashers import make_password
 
 WHERE = (
-    ('D', 'desenvolvimento')
+    ('D', 'desenvolvimento'),
     ('H', 'homologação'),
     ('P', 'produção'),
 )
@@ -12,7 +12,7 @@ LEVELS = (
     ('C', 'critical'),
     ('D', 'debug'),
     ('E', 'error'),
-    ('I', 'information')
+    ('I', 'information'),
     ('W', 'warning'),
 )
 
@@ -27,7 +27,7 @@ class User(models.Model):
 
     token = models.CharField(max_length=128, default=get_random_string(128))
 
-    def save(*args, **kwargs):
+    def save(self, *args, **kwargs):
         self.password = make_password(self.password)
 
         super(User, self).save(*args, **kwargs)
@@ -40,7 +40,7 @@ class Event(models.Model):
     findWhere = models.CharField(choices=WHERE, max_length=1)
     level = models.CharField(choices=LEVELS, max_length=1)
 
-    address = models.IPAddressField()
+    address = models.GenericIPAddressField()
     date = models.DateField(auto_now=True)
 
     title = models.CharField(max_length=256)

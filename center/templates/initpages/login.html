@@ -1,4 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block stylesImport %}
+<link rel="stylesheet" href={% static 'center/registerLoginPage.css' %}>
+{% endblock stylesImport %}
 {% block content %}
-    <h1>Página de Login</h1>
+    <h1 id='pageTitle'>Central de Erros</h1>
+    <form id='mainForm' method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div id='bottomDiv'>
+        <button id='submitForm' type="submit"><p id='btnText'>LogIn</p></button>
+        <p>Não tem uma conta ainda? <a href={% url 'center:register' %}>clique aqui para se cadastrar.</a></p>
+    </div>
+    </form>
+    
 {% endblock content %}

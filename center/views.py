@@ -93,6 +93,13 @@ def registerPage(request):
 
 
 def eventsPage(request):
+    try:
+        if request.session['username'] == '':
+            raise Exception('Invalid Session Data')
+        if request.session['token'] == '':
+            raise Exception('Invalid Session Data')
+    except:
+        return redirect('center:loginPage')
     context = {
         'userToken': request.session['token']
     }

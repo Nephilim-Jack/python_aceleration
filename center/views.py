@@ -56,6 +56,7 @@ def loginPage(request):
                 return redirect('center:eventsPage')
 
         form = UserModelForm()
+        del form.fields['username']
         context = {
             'form': form,
             'alert': True
@@ -100,10 +101,114 @@ def eventsPage(request):
             raise Exception('Invalid Session Data')
     except:
         return redirect('center:loginPage')
+
+    requestParams = False
+    try:
+        showOnly = request.GET.get('showOnly')
+        orderBy = request.GET.get('orderBy')
+        findBy = request.GET.get('findBy')
+        query = request.GET.get('q')
+
+        requestParams = True
+    except:
+        pass
+
+    # filtering
+    events = Event.objects.all()
+    if requestParams:
+        if showOnly != 'A':
+            events = events.filter(findWhere__exact=showOnly)
+        if findBy != 'A':
+            if findBy == 'L':
+                events = events.filter(level__contains=query)
+
+            if findBy == 'D':
+                events = events.filter(details__contains=query)
+
+            if findBy == 'O':
+                events = events.filter(findWhere__contains=query)
+
+        if orderBy != 'A':
+            if orderBy == 'L':
+                events = events.order_by('level')
+            if orderBy == 'F':
+                events = events.order_by('-quantity')
+
+    eventsSerialized = list()
+    for event in events:
+        if event.level == 'C':
+            event.level = 'Critical'
+        elif event.level == 'D':
+            event.level = 'Debug'
+        elif event.level == 'E':
+            event.level = 'Error'
+        elif event.level == 'I':
+            event.level = 'Information'
+        elif event.level == 'W':
+            event.level = 'Warning'
+
+        if event.findWhere == 'D':
+            event.findWhere = 'Desenvolvimento'
+        elif event.findWhere == 'H':
+            event.findWhere = 'Homologação'
+        elif event.findWhere == 'P':
+            event.findWhere = 'Produção'
+
+        eventsSerialized.append(event)
     context = {
-        'userToken': request.session['token']
+        'user': User.objects.get(token__exact=request.session['token']),
+        'events': eventsSerialized
     }
     return render(request, 'eventPages/list.html', context=context)
+
+
+def detailEvent(request, eventPk):
+    try:
+        if request.session['username'] == '':
+            raise Exception('Invalid Session Data')
+        if request.session['token'] == '':
+            raise Exception('Invalid Session Data')
+    except:
+        return redirect('center:loginPage')
+
+    event = Event.objects.get(pk=eventPk)
+    user = User.objects.get(token__exact=request.session['token'])
+    context = {
+        'event': event,
+        'user': user,
+    }
+    return render(request, 'eventPages/detail.html', context=context)
+
+
+def deleteEvent(request, eventPk):
+    try:
+        if request.session['username'] == '':
+            raise Exception('Invalid Session Data')
+        if request.session['token'] == '':
+            raise Exception('Invalid Session Data')
+    except:
+        return redirect('center:loginPage')
+
+    Event.objects.get(pk=eventPk).delete()
+    return redirect('center:eventsPage')
+
+
+def fileEvent(request, eventPk):
+    try:
+        if request.session['username'] == '':
+            raise Exception('Invalid Session Data')
+        if request.session['token'] == '':
+            raise Exception('Invalid Session Data')
+    except:
+        return redirect('center:loginPage')
+
+    event = Event.objects.get(pk=eventPk)
+    if event.filed:
+        event.filed = False
+    else:
+        event.filed = True
+    event.save()
+    return redirect('center:eventsPage')
 
 
 def logOut(request):

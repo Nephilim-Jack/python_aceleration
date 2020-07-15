@@ -1,0 +1,200 @@
+body{
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    color: #333333
+}
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#queryMaker{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.navBar{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #06D6A0;
+    color: white;
+    margin-bottom: 8px;
+}
+
+#queryDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: lightgray;
+    border-radius: 32px;
+    height: 40px;
+    width: 240px;
+
+}
+
+#searchQuery{
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.normal{
+    text-align: center;
+    font-size: 1em;
+}
+
+#whereSelect{
+    border: 1px solid #06D6A0;
+    border-radius: 8px;
+    outline: none;
+}
+
+.selectClass{
+    margin-left: 16px;
+    border: 1px solid #06D6A0;
+    border-radius: 8px;
+    outline: none;
+}
+
+.filed{
+    background-color: #06D6A0;
+    color: white;
+}
+.actionIcons{
+    color: #333333;
+}
+
+.filedActionIcons{
+    color: white;
+}
+
+.tCell{
+    border: 1px solid lightgray;
+}
+
+.tCell > a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.tCellUpper{
+    border-bottom: 1px solid lightgray;
+}
+
+#searchIcon{
+    color: gray;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+@media only screen and (min-width: 400px){
+    #welcomeText{
+        text-align: center;
+        font-size: 2em;
+    }
+    #queryMaker{
+        margin-bottom: 16px;
+    }
+    #queryDiv{
+        margin-bottom: 16px;
+    }
+    #whereSelect{
+        height: 24px;
+        width: 108px;
+    }
+    .selectClass{
+        margin-left: 16px;
+        height: 24px;
+        width: 108px;
+    }
+    .tCellUpper{
+        font-size: 1em;
+        width: 108px;
+    }
+    .tCell{
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+}
+  
+@media only screen and (min-width: 768px) {
+    #welcomeText{
+        text-align: center;
+        font-size: 3em;
+    }
+    #whereSelect{
+        height: 32px;
+        width: 160px;
+    }
+    .tCellUpper{
+        font-size: 1.5em;
+        width: 160px;
+    }
+    .normal{
+        font-size: 1.5em;
+    }
+    .selectClass{
+        margin-left: 16px;
+        height: 32px;
+        width: 160px;
+    }
+    #queryDiv{
+        border-radius: 32px;
+        height: 48px;
+        width: 320px;
+    }
+}
+  
+@media only screen and (min-width: 1200px){
+    #welcomeText{
+        text-align: center;
+        font-size: 4em;
+    }
+    #whereSelect{
+        font-size: 1.3em;
+        height: 40px;
+        width: 240px;
+    }
+    .tCellUpper{
+        font-size: 2em;
+        width: 240px;
+    }
+    .normal{
+        font-size: 2em;
+    }
+    .selectClass{
+        font-size: 1.3em;
+        margin-left: 16px;
+        height: 40px;
+        width: 240px;
+    }
+    #queryDiv{
+        border-radius: 32px;
+        height: 48px;
+        width: 400px;
+    }
+    #searchQuery{
+        font-size: 1.3em;
+        width: 280px;
+    }
+    #searchIcon{
+        font-size: 1.3em;
+    }
+}

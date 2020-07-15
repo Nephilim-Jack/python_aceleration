@@ -1,5 +1,88 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block stylesImport %}
+<link rel="stylesheet" href={% static 'center/listEventsPage.css' %}>
+<script>
+const handleSearchBy = () => {
+    let selectSearchBy = document.getElementById('searchBySelect')
+    let inputSearchBy = document.getElementById('searchQuery')
+
+    if (selectSearchBy.value === 'L') {
+        response = 'Pesquisando por Level'
+    } else if (selectSearchBy.value === 'D'){
+        response = 'Pesquisando por Descrição'
+    } else if (selectSearchBy.value === 'O'){
+        response = 'Pesquisando por Origem'
+    } else {
+        response = 'Selecione oque quer buscar'
+    }
+
+    inputSearchBy.placeholder = response 
+}
+const handleSearchClick = () => {
+    let mainUrl = new URL(window.location.href)
+    mainUrl.searchParams.set('showOnly', document.getElementById('whereSelect').value)
+    mainUrl.searchParams.set('orderBy', document.getElementById('orderBySelect').value)
+    mainUrl.searchParams.set('findBy', document.getElementById('searchBySelect').value)
+    mainUrl.searchParams.set('q', document.getElementById('searchQuery').value)
+
+    window.location.replace(mainUrl)
+}
+</script>
+{% endblock stylesImport %}
 {% block content %}
-<h1>{{ userToken }}</h1>
+<div id='wrapper'>
+    <div class='navBar'>
+        <p id='welcomeText'>Bem Vindo {{ user.username }}</p>
+    </div>
+    <div id='queryMaker'>
+        <select name="where" id="whereSelect">
+            <option value="A">Mostrar Todos</option>
+            <option value="P">Produção</option>
+            <option value="H">Homologação</option>
+            <option value="D">Desenvolvimento</option>
+        </select>
+
+        <select class='selectClass' name="orderBy" id="orderBySelect">
+            <option value="A">Ordenar Por</option>
+            <option value="L">Level</option>
+            <option value="F">Frequência</option>
+        </select>
+
+        <select class='selectClass' name="searchBy" id="searchBySelect" onchange='handleSearchBy()'>
+            <option value="A">Buscar Por</option>
+            <option value="L">Level</option>
+            <option value="D">Descrição</option>
+            <option value="O">Origem</option>
+        </select>
+    </div>
+    <div id='queryDiv'>
+        <input placeholder='Selecione oque quer buscar' type="text" name="searchQuery" id="searchQuery">
+        <button id='searchIcon' onclick='handleSearchClick()'><i class="fas fa-search"></i></button>
+    </div>
+    <table id='mainTable'>
+        <thead id='tableHead'>
+            <th class='tCellUpper'>Level</th>
+            <th class='tCellUpper'>Log</th>
+            <th class='tCellUpper'>Eventos</th>
+            <th class='tCellUpper'>Ações</th>
+        </thead>
+        <tbody id='tableBody'>
+            {% for event in events %}
+            <tr class="normal{% if event.filed %} filed{% endif %}">
+                <td class='tCell'><a href={% url 'center:detailEvent' event.pk %}>{{ event.level }}</a></td>
+                <td class='tCell'><a href={% url 'center:detailEvent' event.pk %}>{{ event.title }}</br>{{ event.findWhere }}</br>{{ event.date }}</a></td>
+                <td class='tCell'><a href={% url 'center:detailEvent' event.pk %}>{{ event.quantity }}</a></td>
+                <td class='tCell'>
+                    <div id='actions'>
+                        <a href={% url 'center:fileEvent' event.pk %}><i class="far fa-folder-open {% if event.filed %}filedActionIcons{% else %}actionIcons{% endif %}"></i></a>
+                        <a href={% url 'center:deleteEvent' event.pk %}><i class="far fa-trash-alt {% if event.filed %}filedActionIcons{% else %}actionIcons{% endif %}"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}

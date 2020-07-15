@@ -3,7 +3,8 @@ from rest_framework import routers
 from .views import (
     EventViewSet, UserViewSet,
     registerPage, loginPage,
-    eventsPage, logOut
+    eventsPage, logOut, fileEvent,
+    deleteEvent, detailEvent
 )
 
 router = routers.DefaultRouter()
@@ -15,5 +16,8 @@ urlpatterns = [
     path('register', registerPage, name='register'),
     path('logout', logOut, name='logOutPage'),
     path('events', eventsPage, name='eventsPage'),
+    path('events/<int:eventPk>', detailEvent, name='detailEvent'),
+    path('events/<int:eventPk>/fileEvent', fileEvent, name='fileEvent'),
+    path('events/<int:eventPk>/deleteEvent', deleteEvent, name='deleteEvent'),
     path('api/', include(router.urls))
 ]

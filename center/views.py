@@ -61,9 +61,9 @@ def loginPage(request):
             'form': form,
             'alert': True
         }
-        return render(request, 'center/initpages/login.html', context=context)
+        return render(request, 'center/initPages/login.html', context=context)
 
-    return render(request, 'center/initpages/login.html', context=context)
+    return render(request, 'center/initPages/login.html', context=context)
 
 
 def registerPage(request):
@@ -89,8 +89,8 @@ def registerPage(request):
             context = {
                 'form': form,
             }
-            return render(request, 'center/initpages/login.html', context=context)
-    return render(request, 'center/initpages/register.html', context=context)
+            return render(request, 'center/initPages/login.html', context=context)
+    return render(request, 'center/initPages/register.html', context=context)
 
 
 def eventsPage(request):

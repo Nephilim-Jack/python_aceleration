@@ -109,11 +109,13 @@ def eventsPage(request):
         findBy = request.GET.get('findBy')
         query = request.GET.get('q')
 
-        requestParams = True
+        if all(showOnly, orderBy, findBy, query):
+            requestParams = True
     except:
         pass
 
     # filtering
+
     events = Event.objects.all()
     if requestParams:
         if showOnly != 'A':
@@ -172,6 +174,18 @@ def detailEvent(request, eventPk):
         return redirect('center:loginPage')
 
     event = Event.objects.get(pk=eventPk)
+
+    if event.level == 'C':
+        event.level = 'Critical'
+    elif event.level == 'D':
+        event.level = 'Debug'
+    elif event.level == 'E':
+        event.level = 'Error'
+    elif event.level == 'I':
+        event.level = 'Information'
+    elif event.level == 'W':
+        event.level = 'Warning'
+
     user = User.objects.get(token__exact=request.session['token'])
     context = {
         'event': event,

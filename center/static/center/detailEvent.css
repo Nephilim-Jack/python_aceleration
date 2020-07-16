@@ -1,0 +1,153 @@
+#horizontalWrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#descText{
+    overflow: scroll;
+    text-align: center;
+}
+
+#levelText{
+    background-color: #06D6A0;
+    color: white;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+#topDiv, #infos, #data, .navBar, .titleDescription, .quantityGatherBy, .secDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mainText, #errorData{
+    color: #333333;
+}
+
+.navBar{
+    background-color: #06D6A0;
+    color: white;
+    margin-bottom: 8px;
+}
+#backButton{
+    background-color: white;
+    color: #06D6A0;
+    border: 1px solid #06D6A0;
+    border-radius: 8px;
+    outline: none;
+}
+
+#backButton:active{
+    background-color: #06D6A0;
+    color: white;
+    border: 1px solid white;
+}
+
+.secondaryText{
+    color: gray; 
+}
+
+.secDiv{
+    overflow: scroll;
+    border-radius: 8px;
+    border: 1px solid lightgray;
+}
+.secDiv::-webkit-scrollbar {
+    display: none;
+  }
+
+@media only screen and (min-width: 400px){
+    #backButton{
+        font-size: 1.5em;
+        width: 160px;
+        height: 40px;
+    }
+    .secDiv{
+        width: 240px;
+        height: 80px;
+        margin-top: -8px;
+    }
+    #horizontalWrapper{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .mainText{
+        font-size: 2em;
+    }
+    .secondaryText, #levelText{
+         font-size: 1.5em;
+    }    
+    .navBar{
+        font-size: 2em;
+    }
+    #errorData{
+        font-size: 1.5em;
+        margin-bottom: -8px;
+    }
+}
+  
+@media only screen and (min-width: 768px) {
+    #backButton{
+        font-size: 2em;
+        width: 240px;
+        height: 56px;
+    }
+    .secDiv{
+        width: 240px;
+        height: 80px;
+        margin-top: -8px;
+    }
+    #horizontalWrapper{
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: flex-end;
+    }
+    .mainText{
+        font-size: 2em;
+    }
+    .secondaryText, #levelText{
+         font-size: 1.5em;
+    }    
+    .navBar{
+        font-size: 2em;
+    }
+    #errorData{
+        font-size: 2em;
+        margin-bottom: -8px;
+    }
+}
+  
+@media only screen and (min-width: 1200px){
+    #backButton{
+        font-size: 2.5em;
+        width: 280px;
+        height: 64px;
+    }
+    .secDiv{
+        width: 480px;
+        height: 128px;
+        margin-top: -8px;
+    }
+    #horizontalWrapper{
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: flex-end;
+    }
+    .mainText{
+        font-size: 3em;
+    }
+    .secondaryText, #levelText{
+         font-size: 2em;
+    }    
+    .navBar{
+        font-size: 3.5em;
+    }
+    #errorData{
+        font-size: 3em;
+        margin-bottom: -8px;
+    }
+}

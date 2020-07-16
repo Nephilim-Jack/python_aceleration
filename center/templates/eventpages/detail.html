@@ -1,6 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block stylesImport %}
+<link rel="stylesheet" href={% static 'center/detailEvent.css' %}>
+<script>
+const handleBackBtn = (where) => {
+    window.location.replace(where)
+}
+</script>
+{% endblock %}
 {% block content %}
-<h1>{{ user.username }}</h1>
-<h1>{{ event.title }}</h1>
+<div id='wrapper'>
+    <div class='navBar'>
+        <p id='welcomeText'>Bem Vindo {{ user.username }}</p>
+    </div>
+    <div id='topDiv'>
+        <button id='backButton' onclick='handleBackBtn("{% url "center:eventsPage" %}")'>Voltar</button>
+        <p id='errorData'>Erro no {{ event.address }} em {{ event.date }}</p>
+    </div>
+    <div id='horizontalWrapper'>
+        <div id='infos'>
+            <div class='titleDescription'>
+                <p class='mainText'>Titulo</p>
+                <div class='secDiv' > <p class='secondaryText'>{{ event.title }}</p></div>
+            </div>
+            <div class='titleDescription'>
+                <p class='mainText'>Descrição</p>
+                <div class='secDiv' ><p class='secondaryText'>{{ event.details }}</p></div>
+            </div>
+        </div>
+        <div id='data'>
+            <p id='levelText'>{{ event.level }}</p>
+            <div class='quantityGatherBy'>
+                <p class='mainText'>Eventos</p>
+                 <div class='secDiv' ><p class='secondaryText'>{{ event.quantity }}</p></div>
+            </div>
+            <div class='quantityGatherBy'>
+                <p class='mainText'>Coletado Por</p>
+                 <div class='secDiv' ><p class='secondaryText'>{{ event.findBy.username }}</p></div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

@@ -26,7 +26,7 @@ SECRET_KEY = 'jl+d33^q21ks^*8mb1ha1=!@+tew220sb(5ebf(s5j2=s@86xb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://aceleradev-python-project.herokuapp.com/']
 
 
 # Application definition

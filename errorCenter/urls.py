@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+
+
+def sendToMain(request):
+    return redirect('center:eventsPage')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', sendToMain, name='index'),
     path('center/', include(('center.urls', 'center'), namespace='center'))
 ]

@@ -61,9 +61,9 @@ def loginPage(request):
             'form': form,
             'alert': True
         }
-        return render(request, 'initpages/login.html', context=context)
+        return render(request, 'center/initpages/login.html', context=context)
 
-    return render(request, 'initpages/login.html', context=context)
+    return render(request, 'center/initpages/login.html', context=context)
 
 
 def registerPage(request):
@@ -89,8 +89,8 @@ def registerPage(request):
             context = {
                 'form': form,
             }
-            return render(request, 'initpages/login.html', context=context)
-    return render(request, 'initpages/register.html', context=context)
+            return render(request, 'center/initpages/login.html', context=context)
+    return render(request, 'center/initpages/register.html', context=context)
 
 
 def eventsPage(request):
@@ -161,7 +161,7 @@ def eventsPage(request):
         'user': User.objects.get(token__exact=request.session['token']),
         'events': eventsSerialized
     }
-    return render(request, 'eventPages/list.html', context=context)
+    return render(request, 'center/eventPages/list.html', context=context)
 
 
 def detailEvent(request, eventPk):
@@ -191,7 +191,7 @@ def detailEvent(request, eventPk):
         'event': event,
         'user': user,
     }
-    return render(request, 'eventPages/detail.html', context=context)
+    return render(request, 'center/eventPages/detail.html', context=context)
 
 
 def deleteEvent(request, eventPk):
